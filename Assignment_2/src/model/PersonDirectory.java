@@ -13,8 +13,14 @@ import java.util.ArrayList;
 public class PersonDirectory {
     
     ArrayList<Person> people;
+
+    public PersonDirectory() {
+        this.people = new ArrayList<Person>();
+    }
     
-    Person addPerson(){
+    
+    
+    public Person addPerson(){
         Person person = new Person();
         people.add(person);
         return person;
@@ -28,5 +34,15 @@ public class PersonDirectory {
         this.people = people;
     }
     
-    
+    public Person search(String searchText){
+        for(Person person : people){
+            if (person.firstName.contains(searchText) || person.lastName.contains(searchText)){
+                return person;
+            }
+            else if(person.workAddress.streetAddress.contains(searchText)|| person.homeAddress.streetAddress.contains(searchText)){
+                return person;
+            }
+        }
+        return null;
+    }
 }
