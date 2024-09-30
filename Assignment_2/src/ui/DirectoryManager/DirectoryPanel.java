@@ -46,6 +46,10 @@ public class DirectoryPanel extends javax.swing.JPanel {
         txtViewDetails = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 204, 204));
+
+        tblPersonDirectory.setBackground(new java.awt.Color(0, 0, 0));
+        tblPersonDirectory.setForeground(new java.awt.Color(255, 204, 0));
         tblPersonDirectory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -59,6 +63,7 @@ public class DirectoryPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblPersonDirectory);
 
+        lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         lblHeading.setText("Directory");
 
         txtViewDetails.setText("View Details");
@@ -84,12 +89,12 @@ public class DirectoryPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                         .addComponent(lblHeading))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(txtViewDetails)))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +107,7 @@ public class DirectoryPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtViewDetails)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
