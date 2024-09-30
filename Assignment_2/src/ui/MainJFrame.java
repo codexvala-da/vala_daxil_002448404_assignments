@@ -98,6 +98,8 @@ public class MainJFrame extends javax.swing.JFrame {
         splitPane.setLeftComponent(controlPanel);
 
         userProcessContainer.setLayout(new java.awt.CardLayout());
+
+        lblHomePage.setBackground(new java.awt.Color(0, 204, 204));
         userProcessContainer.add(lblHomePage, "card2");
 
         splitPane.setRightComponent(userProcessContainer);
