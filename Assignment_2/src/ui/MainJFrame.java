@@ -7,6 +7,7 @@ package ui;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import model.Address;
 import model.Person;
 import model.PersonDirectory;
 import ui.DirectoryManager.CreatePanel;
@@ -27,6 +28,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         directory = new PersonDirectory();
+        generateDemoData();
     }
 
     /**
@@ -131,6 +133,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirectoryActionPerformed
         // TODO add your handling code here:
+        
         DirectoryPanel directoryPanel = new DirectoryPanel(userProcessContainer,directory);
         userProcessContainer.add("Directory Panel",directoryPanel);
         
@@ -186,6 +189,39 @@ public class MainJFrame extends javax.swing.JFrame {
                 new MainJFrame().setVisible(true);
             }
         });
+    }
+    
+    private void generateDemoData() {
+        for (int i = 1; i <= 5; i++) {
+            Person person = directory.createPerson();
+            
+            person.setFirstName("FirstName" + i);
+            person.setLastName("LastName" + i);
+            person.setSocailSecurityNumber("SSN" + i);
+            person.setAge(20 + i);
+
+            Address homeAddress = new Address();
+            homeAddress.setStreetAddress("Home Street " + i);
+            homeAddress.setUnitNumber(i);
+            homeAddress.setCity("City" + i);
+            homeAddress.setState("State" + i);
+            homeAddress.setZipcode("12345" + i);
+            homeAddress.setPhoneNumber("123-456-789" + i);
+            homeAddress.setType(Address.AddressType.HOME);
+            person.setHomeAddress(homeAddress);
+
+            Address workAddress = new Address();
+            workAddress.setStreetAddress("Work Street " + i);
+            workAddress.setUnitNumber(i);
+            workAddress.setCity("Work City" + i);
+            workAddress.setState("Work State" + i);
+            workAddress.setZipcode("54321" + i);
+            workAddress.setPhoneNumber("987-654-321" + i);
+            workAddress.setType(Address.AddressType.WORK);
+            person.setWorkAddress(workAddress);
+
+            directory.addPerson(person);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

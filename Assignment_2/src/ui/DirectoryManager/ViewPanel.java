@@ -6,6 +6,7 @@ package ui.DirectoryManager;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Address;
 import model.Person;
@@ -407,30 +408,42 @@ public class ViewPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        if (validateInput()){
+            try {
         
-        person.setFirstName(txtFirstName.getText());
-        person.setLastName(txtLastName.getText());
-        person.setSocailSecurityNumber(txtSSNNumber.getText());
-        person.setAge(Integer.parseInt(txtAge.getText()));
+            person.setFirstName(txtFirstName.getText());
+            person.setLastName(txtLastName.getText());
+            person.setSocailSecurityNumber(txtSSNNumber.getText());
+            person.setAge(Integer.parseInt(txtAge.getText()));  // Can throw NumberFormatException
+
+            Address homeAddress = person.getHomeAddress();
+            homeAddress.setStreetAddress(txtStreetAddressHA.getText());
+            homeAddress.setUnitNumber(Integer.parseInt(txtUnitNumberHA.getText()));  // Can throw NumberFormatException
+            homeAddress.setCity(txtCityHA.getText());
+            homeAddress.setState(txtStateHA.getText());
+            homeAddress.setZipcode(txtZipCodeHA.getText());
+            homeAddress.setPhoneNumber(txtPhoneNumberHA.getText());
+
+            Address workAddress = person.getWorkAddress();
+            workAddress.setStreetAddress(txtStreetAddressWA.getText());
+            workAddress.setUnitNumber(Integer.parseInt(txtuniNumberWA.getText()));  // Can throw NumberFormatException
+            workAddress.setCity(txtCityWA.getText());
+            workAddress.setState(txtStateWA.getText());
+            workAddress.setZipcode(txtZipCodeWA.getText());
+            workAddress.setPhoneNumber(txtPhoneNumberWA.getText());
+
+
+            populateFields(person);
+            setViewMode();
         
-        Address homeAddress = person.getHomeAddress();
-        homeAddress.setStreetAddress(txtStreetAddressHA.getText());
-        homeAddress.setUnitNumber(Integer.parseInt(txtUnitNumberHA.getText()));
-        homeAddress.setCity(txtCityHA.getText());
-        homeAddress.setState(txtStateHA.getText());
-        homeAddress.setZipcode(txtZipCodeHA.getText());
-        homeAddress.setPhoneNumber(txtPhoneNumberHA.getText());
-        
-        Address workAddress = person.getWorkAddress();
-        workAddress.setStreetAddress(txtStreetAddressWA.getText());
-        workAddress.setUnitNumber(Integer.parseInt(txtuniNumberWA.getText()));
-        workAddress.setCity(txtCityWA.getText());
-        workAddress.setState(txtStateWA.getText());
-        workAddress.setZipcode(txtZipCodeWA.getText());
-        workAddress.setPhoneNumber(txtPhoneNumberWA.getText());
-        
-        populateFields(person);
-        setViewMode();
+            } 
+        catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Please enter valid numeric values for Age and Unit Numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        }  
+    }
+        else{
+        JOptionPane.showMessageDialog(this, "Empty values not allowed", "Input Error", JOptionPane.ERROR_MESSAGE); 
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -548,6 +561,25 @@ public class ViewPanel extends javax.swing.JPanel {
         selectedPerson.setWorkAddress(workAddress);
     }
     
+    private boolean validateInput(){
+        return !(txtFirstName.getText().isBlank()||
+                txtLastName.getText().isBlank() ||
+                txtSSNNumber.getText().isBlank() ||
+                txtAge.getText().isBlank() ||
+                txtCityHA.getText().isBlank() ||
+                txtCityWA.getText().isBlank() ||
+                txtStreetAddressHA.getText().isBlank() ||
+                txtStreetAddressWA.getText().isBlank() ||
+                txtStateHA.getText().isBlank() ||
+                txtStateWA.getText().isBlank() ||
+                txtZipCodeHA.getText().isBlank() ||
+                txtZipCodeWA.getText().isBlank() ||
+                txtUnitNumberHA.getText().isBlank() ||
+                txtuniNumberWA.getText().isBlank() ||
+                txtPhoneNumberHA.getText().isBlank() ||
+                txtPhoneNumberWA.getText().isBlank());
+        
+    }
     private void setViewMode(){
         btnSave.setEnabled(false);
         btnUpdate.setEnabled(true);

@@ -23,6 +23,17 @@ public class Address {
     String PhoneNumber;
     AddressType type;
 
+    public Address(){}
+    
+    public Address(Address other) {
+        this.streetAddress = other.streetAddress;
+        this.unitNumber = other.unitNumber;
+        this.city = other.city;
+        this.State = other.State;
+        this.zipcode = other.zipcode;
+        this.PhoneNumber = other.PhoneNumber;
+    }
+    
     public String getStreetAddress() {
         return streetAddress;
     }
@@ -79,4 +90,12 @@ public class Address {
         this.type = type;
     }
     
+    public boolean isValid(){
+        return !(this.streetAddress.isBlank() ||
+                this.city.isBlank() ||
+                this.zipcode.isBlank() ||
+                this.State.isBlank() ||
+                this.unitNumber <=0 ||
+                this.PhoneNumber.isBlank());
+    }
 }

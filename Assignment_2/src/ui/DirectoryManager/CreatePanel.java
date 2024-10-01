@@ -5,6 +5,7 @@
 package ui.DirectoryManager;
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Address;
 import model.Person;
@@ -438,29 +439,56 @@ public class CreatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
-        Person newPerson = directory.addPerson();
-        newPerson.setFirstName(txtFirstName.getText());
-        newPerson.setLastName(txtLastName.getText());
-        newPerson.setSocailSecurityNumber(txtSSNNumber.getText());
-        newPerson.setAge(Integer.parseInt(txtAge.getText()));
         
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getText();
+        String socialSecurityNumber = txtSSNNumber.getText();
+        
+      
+        Person newPerson = directory.createPerson();
+        
+        try{
+        newPerson.setFirstName(firstName);
+        newPerson.setLastName(lastName);
+        newPerson.setSocailSecurityNumber(socialSecurityNumber);
+        newPerson.setAge(Integer.parseInt(txtAge.getText()));     
+        }
+        catch(NumberFormatException err){
+            JOptionPane.showMessageDialog(jLayeredPane1, "Age should be a number.", "Invalid input", JOptionPane.ERROR_MESSAGE);
+            throw err;
+        }
+        
+        try{
+            
         Address homeAddress = newPerson.getHomeAddress();
+        
         homeAddress.setStreetAddress(txtStreetAddressHA.getText());
-        homeAddress.setUnitNumber(Integer.parseInt(txtUnitNumberHA.getText()));
         homeAddress.setCity(txtCityHA.getText());
         homeAddress.setState(txtStateHA.getText());
         homeAddress.setZipcode(txtZipCodeHA.getText());
         homeAddress.setPhoneNumber(txtPhoneNumberHA.getText());
+        homeAddress.setUnitNumber(Integer.parseInt(txtUnitNumberHA.getText()));
         
         Address workAddress = newPerson.getWorkAddress();
+        
         workAddress.setStreetAddress(txtStreetAddressWA.getText());
-        workAddress.setUnitNumber(Integer.parseInt(txtuniNumberWA.getText()));
         workAddress.setCity(txtCityWA.getText());
         workAddress.setState(txtStateWA.getText());
         workAddress.setZipcode(txtZipCodeWA.getText());
         workAddress.setPhoneNumber(txtPhoneNumberWA.getText());
+        workAddress.setUnitNumber(Integer.parseInt(txtuniNumberWA.getText()));
+        }
+        catch(NumberFormatException error){
+            JOptionPane.showMessageDialog(jLayeredPane1, "Unit number should be an integer.", "Invalid input", JOptionPane.ERROR_MESSAGE);
+            throw error;
+        }
         
+        if (newPerson.validateInput()){
+            directory.addPerson(newPerson);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Check the input, might be having some missing fields.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+        }
         setAllTextfieldsClear();
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -529,4 +557,5 @@ public class CreatePanel extends javax.swing.JPanel {
         txtPhoneNumberHA.setText("");
         txtPhoneNumberWA.setText("");
     }
+
 }

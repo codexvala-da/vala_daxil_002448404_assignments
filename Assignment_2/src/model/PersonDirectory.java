@@ -20,8 +20,12 @@ public class PersonDirectory {
     
     
     
-    public Person addPerson(){
+    public Person createPerson(){
         Person person = new Person();
+        return person;
+    }
+    
+    public Person addPerson(Person person){
         people.add(person);
         return person;
     }
@@ -45,4 +49,9 @@ public class PersonDirectory {
         }
         return null;
     }
+    
+    public void deletePerson(Person person){
+        this.people.remove(person);
+    }
+
 }

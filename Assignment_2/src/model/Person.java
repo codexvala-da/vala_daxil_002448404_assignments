@@ -21,6 +21,15 @@ public class Person {
         this.homeAddress = new Address();
     }
 
+    public Person(Person person) {
+        this.firstName = person.firstName;
+        this.lastName = person.lastName;
+        this.socailSecurityNumber = person.socailSecurityNumber;
+        this.age = person.age;
+        this.homeAddress = new Address(person.homeAddress);  // Deep copy
+        this.workAddress = new Address(person.workAddress);
+    }
+
     
     public String getFirstName() {
         return firstName;
@@ -72,6 +81,15 @@ public class Person {
     
     public String toString(){
         return this.getFirstName();
+    }
+    
+    public boolean validateInput(){
+        return !(this.firstName.isBlank()||
+                this.lastName.isBlank()||
+                this.socailSecurityNumber.isBlank()||
+                this.age <= 0||
+                !this.homeAddress.isValid()||
+                !this.workAddress.isValid());
     }
     
 }
