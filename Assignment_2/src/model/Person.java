@@ -21,15 +21,6 @@ public class Person {
         this.homeAddress = new Address();
     }
 
-    public Person(Person person) {
-        this.firstName = person.firstName;
-        this.lastName = person.lastName;
-        this.socailSecurityNumber = person.socailSecurityNumber;
-        this.age = person.age;
-        this.homeAddress = new Address(person.homeAddress);  // Deep copy
-        this.workAddress = new Address(person.workAddress);
-    }
-
     
     public String getFirstName() {
         return firstName;
