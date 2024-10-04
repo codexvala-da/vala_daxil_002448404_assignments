@@ -134,8 +134,12 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirectoryActionPerformed
         // TODO add your handling code here:
         
-        DirectoryPanel directoryPanel = new DirectoryPanel(userProcessContainer,directory);
-        userProcessContainer.add("Directory Panel",directoryPanel);
+        if (!"Directory Panel".equals(userProcessContainer.getComponent(userProcessContainer.getComponentCount() - 1).getName())){
+        
+            DirectoryPanel directoryPanel = new DirectoryPanel(userProcessContainer,directory);
+        
+            userProcessContainer.add("Directory Panel",directoryPanel);   
+        }
         
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -206,8 +210,7 @@ public class MainJFrame extends javax.swing.JFrame {
             homeAddress.setCity("City" + i);
             homeAddress.setState("State" + i);
             homeAddress.setZipcode("12345" + i);
-            homeAddress.setPhoneNumber("123-456-789" + i);
-            homeAddress.setType(Address.AddressType.HOME);
+            homeAddress.setPhoneNumber("123456789" + i);
             person.setHomeAddress(homeAddress);
 
             Address workAddress = new Address();
@@ -216,8 +219,7 @@ public class MainJFrame extends javax.swing.JFrame {
             workAddress.setCity("Work City" + i);
             workAddress.setState("Work State" + i);
             workAddress.setZipcode("54321" + i);
-            workAddress.setPhoneNumber("987-654-321" + i);
-            workAddress.setType(Address.AddressType.WORK);
+            workAddress.setPhoneNumber("987654321" + i);
             person.setWorkAddress(workAddress);
 
             directory.addPerson(person);

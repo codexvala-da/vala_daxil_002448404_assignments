@@ -10,18 +10,13 @@ package model;
  */
 public class Address {
     
-    public enum AddressType{
-        WORK,
-        HOME
-    }
     
     String streetAddress;
-    int unitNumber;
+    byte unitNumber;
     String city;
     String State;
     String zipcode;
-    String PhoneNumber;
-    AddressType type;
+    long PhoneNumber;
 
     public Address(){}
     
@@ -47,7 +42,7 @@ public class Address {
     }
 
     public void setUnitNumber(int unitNumber) {
-        this.unitNumber = unitNumber;
+        this.unitNumber = (byte) unitNumber;
     }
 
     public String getCity() {
@@ -75,20 +70,13 @@ public class Address {
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return Long.toString(PhoneNumber);
     }
 
     public void setPhoneNumber(String PhoneNumber) {
-        this.PhoneNumber = PhoneNumber;
+        this.PhoneNumber = Long.parseLong(PhoneNumber);
     }
-
-    public AddressType getType() {
-        return type;
-    }
-
-    public void setType(AddressType type) {
-        this.type = type;
-    }
+   
     
     public boolean isValid(){
         return !(this.streetAddress.isBlank() ||
@@ -96,6 +84,6 @@ public class Address {
                 this.zipcode.isBlank() ||
                 this.State.isBlank() ||
                 this.unitNumber <=0 ||
-                this.PhoneNumber.isBlank());
+                this.PhoneNumber == 0);
     }
 }

@@ -12,7 +12,7 @@ public class Person {
     String firstName;
     String lastName;
     String socailSecurityNumber;
-    int age;
+    short age;
     Address workAddress;
     Address homeAddress;
 
@@ -56,11 +56,11 @@ public class Person {
     }
 
     public int getAge() {
-        return age;
+        return Short.toUnsignedInt(age);
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.age = Short.parseShort(Integer.toString(age));
     }
 
     public Address getWorkAddress() {
