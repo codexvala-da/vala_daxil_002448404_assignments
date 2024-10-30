@@ -58,4 +58,10 @@ public class FacultyProfile {
         return false;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+    
+    
+
 }

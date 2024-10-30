@@ -59,7 +59,12 @@ public class CourseOffer {
         return null;
     }
 
+    public Course getCourse() {
+        return course;
+    }
 
+
+    
     public SeatAssignment assignEmptySeat(CourseLoad cl) {
 
         Seat seat = getEmptySeat();

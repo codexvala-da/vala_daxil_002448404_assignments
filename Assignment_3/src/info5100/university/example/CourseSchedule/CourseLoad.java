@@ -35,6 +35,19 @@ public class CourseLoad {
         seatassignments.add(sa);
     }
     
+    public float getSemesterGPA(){
+        float sumGrades = 0;
+        for (SeatAssignment sa : seatassignments) {
+            sumGrades += sa.getGrade();
+        }
+        return seatassignments.isEmpty() ? 0 : sumGrades / seatassignments.size();
+    }
+    
+    public float getTotalTuitionFees(float feePerCourse){
+        return feePerCourse * seatassignments.size();
+    }
+    
+    
     public float getSemesterScore(){ //total score for a full semeter
         float sum = 0;
         for (SeatAssignment sa: seatassignments){
@@ -47,3 +60,4 @@ public class CourseLoad {
         }
             
 }
+

@@ -44,8 +44,9 @@ public class Info5001UniversityExample {
         for (int i = 0; i < 10; i++) {
             String courseName = "Course " + i;
             String courseCode = "CODE" + (1000 + i); // Generates codes like CODE1001, CODE1002, etc.
-    
-            coursecatalog.newCourse(courseName, courseCode, 4, i==0);
+            Course course = coursecatalog.newCourse(courseName, courseCode, 4, i==0);
+            if (i==0)department.addCoreCourse(course);
+            else department.addElectiveCourse(course);
         }
         
         // Checking correct execution of course creation
@@ -141,7 +142,45 @@ public class Info5001UniversityExample {
         }
         
         // Printing report for semester Fall2024
-        StudentDirectory student_directory = department.getStudentDirectory();
+        float feePerCourse = 1500.0f;
+    
+        // Print report for Fall 2024
+        printSemesterReport("Fall2024", department, feePerCourse);
+        
+        
     }
+    
+    public static void printSemesterReport(String semester, Department department, float feePerCourse) {
+    System.out.println("\n--- Semester Report for " + semester + " ---");
+    for (StudentProfile student : department.getStudentDirectory().getStudentlist()) {
+        System.out.println("\nStudent: " + student.getPerson().getPersonId());
+        
+        CourseLoad courseload = student.getCourseLoadBySemester(semester);
+        if (courseload == null) {
+            System.out.println("No courses registered for this semester.");
+            continue;
+        }
+        
+        System.out.println("Courses registered:");
+        for (SeatAssignment sa : courseload.getSeatAssignments()) {
+            CourseOffer courseOffer = sa.getSeat().getCourseOffer();
+            String professor = courseOffer.getFacultyProfile().getPerson().getPersonId();
+            System.out.println("  - Course: " + courseOffer.getCourse().getName()+
+                               " | Professor: " + professor +
+                               " | Grade: " + sa.getGrade());
+        }
+        
+        float gpa = courseload.getSemesterGPA();
+        float tuition = 0;
+        ArrayList<SeatAssignment> seatAssignments = courseload.getSeatAssignments();
+        for(SeatAssignment sa : seatAssignments){
+            int price = sa.getCourseOffer().getCourse().getCoursePrice();
+            tuition+=price;
+        }
+        
+        System.out.printf("Average GPA for semester: %.2f%n", gpa);
+        System.out.printf("Total Tuition Fees: $%.2f%n", tuition);
+    }
+}
 
 }

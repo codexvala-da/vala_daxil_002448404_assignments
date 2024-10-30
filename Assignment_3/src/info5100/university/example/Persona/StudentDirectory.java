@@ -45,4 +45,10 @@ public class StudentDirectory {
     public int size(){
         return studentlist.size();
     }
+
+    public ArrayList<StudentProfile> getStudentlist() {
+        return studentlist;
+    }
+    
+    
 }
