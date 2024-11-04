@@ -150,6 +150,7 @@ public class Info5001UniversityExample {
         
     }
     
+    // Method to print requested report
     public static void printSemesterReport(String semester, Department department, float feePerCourse) {
     System.out.println("\n--- Semester Report for " + semester + " ---");
     for (StudentProfile student : department.getStudentDirectory().getStudentlist()) {
