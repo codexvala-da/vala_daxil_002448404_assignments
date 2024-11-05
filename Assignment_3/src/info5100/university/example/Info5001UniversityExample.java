@@ -141,17 +141,15 @@ public class Info5001UniversityExample {
             }
         }
         
-        // Printing report for semester Fall2024
-        float feePerCourse = 1500.0f;
     
         // Print report for Fall 2024
-        printSemesterReport("Fall2024", department, feePerCourse);
+        printSemesterReport("Fall2024", department);
         
         
     }
     
     // Method to print requested report
-    public static void printSemesterReport(String semester, Department department, float feePerCourse) {
+    public static void printSemesterReport(String semester, Department department) {
     System.out.println("\n--- Semester Report for " + semester + " ---");
     for (StudentProfile student : department.getStudentDirectory().getStudentlist()) {
         System.out.println("\nStudent: " + student.getPerson().getPersonId());
